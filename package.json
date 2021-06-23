@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Demo of api for Amex capstone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kiresorg/amex-demo-server.git"
+  },
+  "author": "Erik Gross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kiresorg/amex-demo-server/issues"
+  },
+  "homepage": "https://github.com/Kiresorg/amex-demo-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.6.2"
+  }
+}
