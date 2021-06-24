@@ -10,3 +10,19 @@ GET http://localhost:8080 HTTP/1.1
 
 POST http://localhost:8080/api/customer HTTP/1.1
 Content-Type: application/json
+
+
+### /api/address API calls
+
+### POST to create an Address
+
+POST http://localhost:8080/api/address HTTP/1.1
+Content-Type: application/json
+
+{
+    "address_line1": "123 Main Street",
+    "address_line2": "Suite 4",
+    "city": "Portland",
+    "state": "Oregon",
+    "zip": "97239"
+}

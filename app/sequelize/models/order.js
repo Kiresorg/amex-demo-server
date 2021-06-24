@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Order.belongsTo(models.Customer);
 
       //Order has many-to-many relationship with Product
-      Order.belongsToMany(models, Product, {
+      Order.belongsToMany(models.Product, {
         through: models.OrderProduct,
         foreignKey: 'order_id'
       })

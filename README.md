@@ -97,3 +97,5 @@ The above listing of data fields is not necessarily comprehensive. You'll also o
 |  GET  |  api/products/:id  |  Get specific product  |
 |  PUT  |  api/products/:id  |  Increment/Decrement product inventory  |
  
+## Notes
+Faking data for the dB: http://marak.github.io/faker.js/
