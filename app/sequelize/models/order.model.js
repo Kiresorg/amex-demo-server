@@ -2,17 +2,21 @@ const {Sequelize, DataTypes} = require('sequelize');
 
 
 module.exports = (sequelize, Sequelize) => { 
-    var Customer = sequelize.define('customer', 
+    var Order = sequelize.define('order', 
         {
-            customer_id: {
-                type: DataTypes.INTEGER,
+            order_status: {
+                type: DataTypes.STRING,
                 allowNull: false
             },
-            first_name: {
+            datetime_order_places: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            last_name: {
+            total_order_price: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            order_notes: {
                 type: DataTypes.STRING,
                 allowNull: false
             }
@@ -20,5 +24,5 @@ module.exports = (sequelize, Sequelize) => {
         { timestamps: false }
     );
 
-    return Customer;
+    return Order;
 };

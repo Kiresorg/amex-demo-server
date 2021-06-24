@@ -1,7 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-require('dotenv').config;
+require('dotenv').config();
+const config = require('./config/secret-config.json');
+
+const sequelize = require('./app/sequelize');
 
 const app = express();
 
@@ -15,18 +18,14 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// const db = require("./app/models");
-// db.mongoose
-//     .connect(db.url, {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true
-//     })
-//     .then(() => {
-//         console.log("Connected to Mongo database");
-//     })
-//     .catch(err => {
-//         console.log("Unable to connect to the database. ", err);
-//     });
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // top route for testing
 app.get("/", (req, res) => {
