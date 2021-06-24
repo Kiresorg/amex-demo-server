@@ -16,6 +16,15 @@ exports.newAddress = (req, res) => {
     }).then (result => {
         res.status(200).send(result);
     }).catch (error => {
-        res.status(500).send("An error occured: " + error);
+        res.status(500).send("Error on create address: " + error);
+    })
+}
+
+exports.getAll = (req, res) => {
+    model.Address.findAll({
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on get all addresses: " + error);
     })
 }
