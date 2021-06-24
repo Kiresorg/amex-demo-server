@@ -35,7 +35,12 @@ exports.getById = (req, res) => {
             id: req.params.id
         }
     }).then (result => {
-        res.status(200).send(result);
+        if(!result) {
+            res.sendStatus(404);
+        }
+        else {
+            res.status(200).send(result);
+        }
     }).catch (error => {
         res.status(500).send("Error on get address with id of" + req.params.id + ": " + error);
     })
@@ -50,11 +55,23 @@ exports.update = (req, res) => {
         zip: req.body.zip
     }, {
         where: {
-        id: req.params.id
+            id: req.params.id
         }
     }).then (result => {
         res.status(200).send(result);
     }).catch (error => {
         res.status(500).send("Error on updating address with id of" + req.params.id + ": " + error);
+    })
+}
+
+exports.deleteById = (req, res) => {
+    model.Address.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then (result => {
+        res.sendStatus(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on deleting address with id of" + req.params.id + ": " + error);
     })
 }

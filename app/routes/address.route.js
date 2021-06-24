@@ -15,5 +15,8 @@ module.exports = app => {
     // PUT an update to an address
     router.put('/:id', addressController.update);
 
+    // DELETE an address by id
+    router.delete('/:id', addressController.deleteById);
+
     app.use("/api/address", router);
 };
