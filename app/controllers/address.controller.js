@@ -28,3 +28,33 @@ exports.getAll = (req, res) => {
         res.status(500).send("Error on get all addresses: " + error);
     })
 }
+
+exports.getById = (req, res) => {
+    model.Address.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on get address with id of" + req.params.id + ": " + error);
+    })
+}
+
+exports.update = (req, res) => {
+    model.Address.update({
+        address_line1: req.body.address_line1,
+        address_line2: req.body.address_line2,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip
+    }, {
+        where: {
+        id: req.params.id
+        }
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on updating address with id of" + req.params.id + ": " + error);
+    })
+}

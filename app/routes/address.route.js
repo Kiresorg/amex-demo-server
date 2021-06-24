@@ -6,7 +6,14 @@ module.exports = app => {
     // GET all addresses
     router.get('/', addressController.getAll);
 
+    // GET address by id
+    router.get('/:id', addressController.getById);
+
+    // POST a new address
     router.post('/', addressController.newAddress);
+
+    // PUT an update to an address
+    router.put('/:id', addressController.update);
 
     app.use("/api/address", router);
 };
