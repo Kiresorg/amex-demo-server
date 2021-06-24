@@ -4,4 +4,5 @@ function applyExtraSetup(sequelize) {
     customer.hasMany(order);
 }
 
+
 module.exports = { applyExtraSetup };

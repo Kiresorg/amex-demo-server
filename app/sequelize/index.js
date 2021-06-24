@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { applyExtraSetup } = require('../sequelize/relationships');
+const { applyExtraSetup } = require('./db.setup');
 const config = require('../../config/secret-config.json');
 
 const db = config.DB;
