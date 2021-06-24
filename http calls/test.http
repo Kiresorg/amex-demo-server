@@ -20,8 +20,8 @@ POST http://localhost:8080/api/address HTTP/1.1
 Content-Type: application/json
 
 {
-    "address_line1": "123 Main Street",
-    "address_line2": "Suite 4",
+    "address_line1": "345 W Main Street",
+    "address_line2": "Suite 200",
     "city": "Portland",
     "state": "Oregon",
     "zip": "97239"

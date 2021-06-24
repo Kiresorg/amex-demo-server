@@ -17,7 +17,7 @@ if (config.use_env_variable) {
       dialect: config.dialect
   });
 }
-
+console.log('Connected to the ' + config.database + ' database');
 fs
   .readdirSync(__dirname)
   .filter(file => {

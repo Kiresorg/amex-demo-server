@@ -99,3 +99,6 @@ The above listing of data fields is not necessarily comprehensive. You'll also o
  
 ## Notes
 Faking data for the dB: http://marak.github.io/faker.js/
+Data types for Sequelize: https://sequelize.org/v5/manual/data-types.html
+Manual for Sequelize migrations: https://sequelize.org/v3/docs/migrations/
+Great example of migrations in Express app: https://developers.decoded.africa/index.php/2020/07/30/how-to-setup-a-node-express-js-project-with-sequelize-cli/

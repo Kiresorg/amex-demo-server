@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const config = require('./config/secret-config.json');
 
-//const sequelize = require('./app/sequelize');
-
 const app = express();
 
 var corsOptions = {
