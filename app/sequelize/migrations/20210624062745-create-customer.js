@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       notes: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       addressId: {
         type: Sequelize.INTEGER,

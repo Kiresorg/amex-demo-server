@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     order_status: DataTypes.STRING,
-    datetime_order_places: DataTypes.DATE,
-    total_order_price: DataTypes.INTEGER,
-    order_notes: DataTypes.STRING
+    datetime_order_placed: DataTypes.DATE,
+    total_order_price: DataTypes.DECIMAL(10,2),
+    order_notes: DataTypes.STRING(1000)
   }, {
     sequelize,
     modelName: 'Order',

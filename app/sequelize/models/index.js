@@ -14,7 +14,8 @@ if (config.use_env_variable) {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, {
       host: config.host,
-      dialect: config.dialect
+      dialect: config.dialect,
+      logging: console.log
   });
 }
 console.log('Connected to the ' + config.database + ' database');

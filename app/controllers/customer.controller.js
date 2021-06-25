@@ -1,168 +1,103 @@
-exports.createCustomer = (req, res) => {
-    res.status(200).send('reached the createCustomer() method in the controller');
-    return;
+const model = require('../sequelize/models');
+
+exports.create = (req, res) => {
+    let first_name = req.body.first_name;
+    let middle_name = req.body.middle_name;
+    let last_name = req.body.last_name;
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let notes = req.body.notes;
+    let addressId = req.body.addressId;
+
+    model.Customer.create({
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        phone: phone,
+        email: email,
+        notes: notes,
+        addressId: addressId
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on create customer: " + error);
+    })
 }
 
+exports.getAll = (req, res) => {
+    model.Customer.findAll({
+        attributes: [
+            'id',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'phone',
+            'email',
+            'notes',
+            'addressId'
+        ]
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on get all customers: " + error);
+    })
+}
 
+exports.getById = (req, res) => {
+    model.Customer.findOne({
+        attributes: [
+            'id',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'phone',
+            'email',
+            'notes',
+            'addressId'
+        ],
+        where: {
+            id: req.params.id
+        }
+    }).then (result => {
+        if(!result) {
+            res.sendStatus(404);
+        }
+        else {
+            res.status(200).send(result);
+        }
+    }).catch (error => {
+        res.status(500).send("Error on get customer with id of" + req.params.id + ": " + error);
+    })
+}
 
+exports.update = (req, res) => {
+    model.Customer.update({
+        first_name: req.body.first_name,
+        middle_name: req.body.middle_name,
+        last_name: req.body.last_name,
+        phone: req.body.phone,
+        email: req.body.email,
+        notes: req.body.notes,
+        addressId: req.body.addressId
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then (result => {
+        res.status(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on updating customer with id of" + req.params.id + ": " + error);
+    })
+}
 
-// const db = require("../models");
-// const { sequelize, orders } = require("../models");
-// const Order = db.orders;
-// const Order_Product = db.order_products;
-
-// const mySQLdatetime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-// // create an order
-// exports.createOrder = (req, res) => {
-
-//     // validate that request has all required fields 
-//     if( !req.body.customer_id|| !req.body.order_status_code ||
-//         !req.body.total_order_price) {
-
-//         res.status(400).send({ message: "Missing form data" });
-//         return;
-//     }
-
-//     // create Order
-//     const order = new Order({
-//         customer_id: req.body.customer_id,
-//         order_status_id: req.body.order_status_code,
-//         datetime_order_placed: mySQLdatetime,
-//         total_order_price: req.body.total_order_price,
-//         notes: req.body.notes ? req.body.notes : '',
-//     });
-
-//     order
-//         .save(order)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Error while creating Order"
-//             });
-//         })
-// };
-
-// // get all orders
-// exports.findAll = (req, res) => {
-//     sequelize.query
-//     (`CALL GetAllProducts()`)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Error while retreving Orders"
-//             });
-//         });
-// };
-
-// // Delete an order from ID
-// exports.deleteOrderById = (req, res) => {
-//     const id = parseInt(req.params.id, 10);
-//     if (Number.isNaN(id)) {
-//         res.status(404).send({
-//             message: "Invalid ID parameter."
-//         });
-//     }
-
-//     Order_Product.destroy({
-//         where: { order_id: id }
-//     }).catch(err => {
-//         res.status(500).send({
-//             message: "Error with deleting order_product."
-//         });
-//     });
-//     Order.destroy({
-//         where: { id: id }
-//     })
-//         .then(data => {
-//             if (!data) {
-//                 res.status(404).send({
-//                     message: `Unable to delete Order with id of ${id}.`
-//                 });
-//             } else {
-//                 res.send({
-//                     message: "Order deleted successfully."
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error with deleting order."
-//             });
-//         });
-// };
-
-// // Get one order from ID
-// exports.findById = (req, res) => {
-//     const id = parseInt(req.params.id, 10);
-//     if (Number.isNaN(id)) {
-//         res.status(404).send({
-//             message: "Invalid ID parameter."
-//         });
-//         return;
-//     }
-
-//     Order.findByPk(id)
-//         .then(data => {
-//             if (!data)
-//                 res.status(404).send({ message: "Not found: Order with id of " + id });
-//             else
-//                 res.send(data);
-//         })
-//         .catch(err => {
-//             res
-//                 .status(500)
-//                 .send({ message: "Error retreiving Order with id of " + id });
-//         });
-
-// };
-
-// exports.findByCustomerId = (req, res) => {
-//     const id = parseInt(req.params.id, 10);
-//     if (Number.isNaN(id)) {
-//         res.status(404).send({
-//             message: "Invalid ID parameter."
-//         });
-//         return;
-//     }
-
-//     Order.findAll({
-//         where: { customer_id: id }
-//     })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Error while retreving Orders"
-//             });
-//         });
-// }
-
-// // Edit an order from ID
-// exports.editOrderById = (req, res) => {
-//     const id = parseInt(req.params.id, 10);
-//     if (Number.isNaN(id)) {
-//         res.status(404).send({
-//             message: "Invalid ID parameter."
-//         });
-//         return;
-//     }
-
-//     sequelize.query
-//         (`CALL UpdateOrder(${id}, ${req.body.customer_id}, ${req.body.order_status_id}, "${req.body.datetime_order_placed}", ${req.body.total_order_price}, "${req.body.notes}");`)
-//         .then(function(response){
-//             res.send({message: "Procedure successfully completed." });
-//         }).catch(err => {
-//             res
-//                 .status(500)
-//                 .send({ message: "Error updating Order with id of " + id + ": " + err });
-//         })
-// };
+exports.deleteById = (req, res) => {
+    model.Customer.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then (result => {
+        res.sendStatus(200).send(result);
+    }).catch (error => {
+        res.status(500).send("Error on deleting customer with id of" + req.params.id + ": " + error);
+    })
+}

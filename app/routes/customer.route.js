@@ -1,30 +1,22 @@
 module.exports = app => {
-    const controller = require('../controllers/customer.controller');
+    const customerController = require('../controllers/customer.controller');
 
-    var router = require("express").Router();
+    const router = require("express").Router();
 
-    // Endpoint: GET on api/orders/ 
-    // Get all orders
-    //router.get("/", controller.findAll);
+    // GET all customers
+    router.get('/', customerController.getAll);
 
-    // Endpoint: GET on api/orders/:id 
-    // Get one order
-    //router.get('/:id', controller.findById);
+    // GET customer by id
+    router.get('/:id', customerController.getById);
 
-    // Endpoint: PUT on api/orders/:id
-    // Edit an order
-    //router.put('/:id', controller.editOrderById)
+    // POST a new customer
+    router.post('/', customerController.create);
 
-    // Endpoint: POST on api/orders
-    // Create an order
-    router.post('/', controller.createCustomer);
+    // PUT an update to an customer
+    router.put('/:id', customerController.update);
 
-    // Endpoint: DELETE on api/orders/:id
-    // Delete an order
-    //router.delete('/:id', controller.deleteOrderById);
-
-    // Additional Endpoint : GET on api/orders/customers/:id
-    //router.get('/customers/:id', controller.findByCustomerId);
+    // DELETE an customer by id
+    router.delete('/:id', customerController.deleteById);
 
     app.use("/api/customer", router);
 };

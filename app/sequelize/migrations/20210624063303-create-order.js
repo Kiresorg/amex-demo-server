@@ -18,14 +18,14 @@ module.exports = {
       order_status: {
         type: Sequelize.STRING
       },
-      datetime_order_places: {
+      datetime_order_placed: {
         type: Sequelize.DATE
       },
       total_order_price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(10,2)
       },
       order_notes: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       createdAt: {
         allowNull: false,

@@ -1,6 +1,6 @@
 const model = require('../sequelize/models');
 
-exports.newAddress = (req, res) => {
+exports.create = (req, res) => {
     let address_line1 = req.body.address_line1;
     let address_line2 = req.body.address_line2;
     let city = req.body.city;
