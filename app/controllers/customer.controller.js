@@ -1,4 +1,5 @@
 const model = require('../sequelize/models');
+const { Sequelize } = require('../sequelize/models');
 
 exports.create = (req, res) => {
     let first_name = req.body.first_name;
@@ -25,25 +26,57 @@ exports.create = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    model.Customer.findAll({
-        attributes: [
-            'id',
-            'first_name',
-            'middle_name',
-            'last_name',
-            'phone',
-            'email',
-            'notes',
-            'addressId'
-        ],
-        order: [
-            ['last_name', 'ASC'],
-        ]
-    }).then (result => {
-        res.status(200).send(result);
-    }).catch (error => {
-        res.status(500).send("Error on get all customers: " + error);
-    })
+    const searchTerm = req.query.searchTerm;
+    const Op = Sequelize.Op;
+    if(searchTerm) {
+        model.Customer.findAll({
+            attributes: [
+                'id',
+                'first_name',
+                'middle_name',
+                'last_name',
+                'phone',
+                'email',
+                'notes',
+                'addressId'
+            ],
+            where: {
+                [Op.or]: [
+                    { first_name: { [Op.like]: '%' + searchTerm + '%' }},
+                    { middle_name: { [Op.like]: '%' + searchTerm + '%' }},
+                    { last_name: { [Op.like]: '%' + searchTerm + '%' }}
+                ]
+            },
+            order: [
+                ['last_name', 'ASC'],
+            ]
+        }).then (result => {
+            res.status(200).send(result);
+        }).catch (error => {
+            res.status(500).send("Error on get all customers: " + error);
+        })
+    }
+    else {
+        model.Customer.findAll({
+            attributes: [
+                'id',
+                'first_name',
+                'middle_name',
+                'last_name',
+                'phone',
+                'email',
+                'notes',
+                'addressId'
+            ],
+            order: [
+                ['last_name', 'ASC'],
+            ]
+        }).then (result => {
+            res.status(200).send(result);
+        }).catch (error => {
+            res.status(500).send("Error on get all customers: " + error);
+        })
+    }
 }
 
 exports.getById = (req, res) => {

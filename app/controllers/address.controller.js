@@ -1,4 +1,3 @@
-const { Sequelize } = require('../sequelize/models');
 const model = require('../sequelize/models');
 
 exports.create = (req, res) => {
@@ -23,14 +22,14 @@ exports.create = (req, res) => {
 
 exports.getAll = (req, res) => {
     const searchTerm = req.query.searchTerm;
-    const Op = Sequelize.Op;
+    const Op = model.Op;
     if(searchTerm) {
         model.Address.findAll({
             where: {
                 [Op.or]: [
-                { address_line1: { [Op.like]: '%' + searchTerm + '%' }},
-                { address_line2: { [Op.like]: '%' + searchTerm + '%' }},
-                { city: { [Op.like]: '%' + searchTerm + '%' }}
+                    { address_line1: { [Op.like]: '%' + searchTerm + '%' }},
+                    { address_line2: { [Op.like]: '%' + searchTerm + '%' }},
+                    { city: { [Op.like]: '%' + searchTerm + '%' }}
                 ]
             }
         }).then (result => {
