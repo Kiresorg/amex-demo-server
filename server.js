@@ -20,10 +20,11 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to Amex CSR API" });
 });
 
-// set up Router
+// set up Routers
 require('./app/routes/customer.route')(app);
 require("./app/routes/address.route")(app);
 require("./app/routes/product.route")(app);
+require("./app/routes/order.route")(app);
 
 
 const PORT = process.env.PORT || 8080;
