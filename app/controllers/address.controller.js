@@ -1,3 +1,4 @@
+const { Sequelize } = require('../sequelize/models');
 const model = require('../sequelize/models');
 
 exports.create = (req, res) => {
@@ -21,12 +22,31 @@ exports.create = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    model.Address.findAll({
-    }).then (result => {
-        res.status(200).send(result);
-    }).catch (error => {
-        res.status(500).send("Error on get all addresses: " + error);
-    })
+    const searchTerm = req.query.searchTerm;
+    const Op = Sequelize.Op;
+    if(searchTerm) {
+        model.Address.findAll({
+            where: {
+                [Op.or]: [
+                { address_line1: { [Op.like]: '%' + searchTerm + '%' }},
+                { address_line2: { [Op.like]: '%' + searchTerm + '%' }},
+                { city: { [Op.like]: '%' + searchTerm + '%' }}
+                ]
+            }
+        }).then (result => {
+            res.status(200).send(result);
+        }).catch (error => {
+            res.status(500).send("Error on get all addresses: " + error);
+        })
+    }
+    else {
+        model.Address.findAll({
+        }).then (result => {
+            res.status(200).send(result);
+        }).catch (error => {
+            res.status(500).send("Error on get all addresses: " + error);
+        })
+    }
 }
 
 exports.getById = (req, res) => {

@@ -18,7 +18,6 @@ To amplify the productivity of customer service representatives (CSR). You will 
 
 ## Overall System Architecture
 ![Overall System Architecture](/images/architecture.png)
-<img src="/images/architecture.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
 
 ## Order lifecycle
 * Customer calls in an order
