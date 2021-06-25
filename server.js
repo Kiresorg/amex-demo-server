@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
 // set up Router
 require('./app/routes/customer.route')(app);
 require("./app/routes/address.route")(app);
+require("./app/routes/product.route")(app);
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
