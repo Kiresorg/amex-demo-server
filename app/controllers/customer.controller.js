@@ -35,6 +35,9 @@ exports.getAll = (req, res) => {
             'email',
             'notes',
             'addressId'
+        ],
+        order: [
+            ['last_name', 'ASC'],
         ]
     }).then (result => {
         res.status(200).send(result);
