@@ -15,7 +15,11 @@ To amplify the productivity of customer service representatives (CSR). You will 
 * CI/CD:
     - Github actions will be used for CI/CD pipelines
 * Deployment: Heroku for both front-end and API
- 
+
+## Overall System Architecture
+![Overall System Architecture](/images/architecture.png)
+<img src="/images/architecture.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
+
 ## Order lifecycle
 * Customer calls in an order
 * CSR adds Customer if not existing
